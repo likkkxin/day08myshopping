@@ -4,12 +4,12 @@
 
     <van-search v-model="search" show-action placeholder="请输入搜索关键词" clearable>
       <template #action>
-        <div>搜索</div>
+        <div @click="goSearch(search)">搜索</div>
       </template>
     </van-search>
 
     <!-- 搜索历史 -->
-    <div class="search-history">
+    <div class="search-history" v-if="history.length>0">
       <div class="title">
         <span>最近搜索</span>
         <van-icon name="delete-o" size="16" @click="clear"/>
@@ -23,12 +23,13 @@
 </template>
 
 <script>
+import { getHistoryList, setHistoryList } from '@/utils/storage'
 export default {
   name: 'SearchIndex',
   data () {
     return {
       search: '',
-      history: ['手机', '空调', '白酒', '电视']
+      history: getHistoryList()
     }
   },
   methods: {
@@ -39,10 +40,14 @@ export default {
         this.history.splice(index, 1)
       }
       this.history.unshift(key)
+      setHistoryList(this.history)
+
       this.$router.push(`/searchlist?search=${key}`)
     },
     clear () {
       this.history = []
+      setHistoryList([])
+      this.$toast.success('清空历史成功')
     }
   }
 }

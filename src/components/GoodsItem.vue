@@ -19,7 +19,9 @@
 <script>
 export default {
   props: {
-    item: Object
+    item: {
+      type: Object
+    }
   }
 }
 </script>
