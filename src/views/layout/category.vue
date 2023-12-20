@@ -17,13 +17,14 @@
       <div class="left">
         <ul>
           <li v-for="(item, index) in list" :key="item.category_id">
-            <a :class="{ active: index === activeIndex }" @click="activeIndex = index" href="javascript:;">{{ item.name }}</a>
+            <a :class="{ active: index === activeIndex }" @click="activeIndex = index" href="javascript:;">
+              {{ item.name }}</a>
           </li>
         </ul>
       </div>
       <div class="right">
         <div @click="$router.push(`/searchlist?categoryId=${item.category_id}`)" v-for="item in list[activeIndex]?.children" :key="item.category_id" class="cate-goods">
-          <img :src="item.image?.external_url" alt="">
+          <img :src="item.image.external_url" alt="">
           <p>{{ item.name }}</p>
         </div>
       </div>
