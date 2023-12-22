@@ -113,6 +113,7 @@
 import { getProComments, getProDetail } from '@/api/product'
 import defaultImg from '@/assets/default-avatar.png'
 import CountBox from '@/components/CountBox.vue'
+import { addCart } from '../api/cart'
 export default {
   components: {
     CountBox
@@ -131,7 +132,8 @@ export default {
       defaultImg,
       mode: 'cart',
       showPannel: false,
-      addCount: 1
+      addCount: 1,
+      cartTotal: 0
     }
   },
   methods: {
@@ -152,7 +154,10 @@ export default {
         }).catch(() => {})
         return
       }
-      console.log('进行加入购物车操作')
+      const { data } = await addCart(this.goodsId, this.addCount, this.detail.skuList[0].goods_sku_id)
+      this.cartTotal = data.cartTotal
+      this.$toast('加入购物车成功')
+      this.showPannel = false
     },
     onChange (index) {
       this.current = index

@@ -65,7 +65,8 @@ export default {
       this.$store.commit('user/setUserInfo', res.data)
       // console.log('存入VUEX的登录权证' + this.$store.state.token)
       console.log('服务器返回登录信息：' + res.data.token)
-      this.$router.push('/')
+      const url = this.$route.query.backUrl || '/'
+      this.$router.replace(url)
       this.$toast('登录成功')
     },
     // 获取短信验证码
