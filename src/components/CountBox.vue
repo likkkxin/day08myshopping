@@ -8,6 +8,7 @@
 
 <script>
 export default {
+  namespaced: true,
   props: {
     value: {
       type: Number,

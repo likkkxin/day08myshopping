@@ -45,10 +45,11 @@
         <van-icon name="wap-home-o" />
         <span>首页</span>
       </div>
-      <div class="icon-cart">
-        <van-icon name="shopping-cart-o" />
-        <span>购物车</span>
-      </div>
+      <router-link to="/cart" class="icon-cart">
+  <span v-if="cartTotal > 0" class="num">{{ cartTotal }}</span>
+  <van-icon name="shopping-cart-o" />
+  <span>购物车</span>
+</router-link>
       <div class="btn-add" @click="addFn">加入购物车</div>
       <div class="btn-buy" @click="buyFn">立刻购买</div>
     </div>
@@ -299,6 +300,22 @@ export default {
       color: #999;
     }
   }
+  .footer .icon-cart {
+  position: relative;
+  padding: 0 6px;
+  .num {
+    z-index: 999;
+    position: absolute;
+    top: -2px;
+    right: 0;
+    min-width: 16px;
+    padding: 0 4px;
+    color: #fff;
+    text-align: center;
+    background-color: #ee0a24;
+    border-radius: 50%;
+  }
+}
 
   .footer {
     position: fixed;
