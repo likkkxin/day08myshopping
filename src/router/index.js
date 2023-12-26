@@ -7,6 +7,7 @@ import ProDetail from '@/views/prodetail'
 import LoginPage from '@/views/login'
 import PayPage from '@/views/pay'
 import MyOrder from '@/views/myorder'
+import addressPage from '@/views/address'
 
 import Home from '@/views/layout/home'
 import Category from '@/views/layout/category'
@@ -30,6 +31,10 @@ const routes = [
   {
     path: '/login',
     component: LoginPage
+  },
+  {
+    path: '/address',
+    component: addressPage
   },
 
   {

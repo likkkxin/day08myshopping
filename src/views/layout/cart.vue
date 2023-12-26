@@ -66,7 +66,7 @@
             >¥ <i class="totalPrice">{{ selPrice }}</i></span
           >
         </div>
-        <div v-if="!isEdit" :class="{ disabled: selCount === 0 }" class="goPay">
+        <div v-if="!isEdit" @click="goPay" :class="{ disabled: selCount === 0 }" class="goPay">
           结算({{ selCount }})
         </div>
         <div
@@ -100,7 +100,7 @@ export default {
       return this.$store.getters.token
     },
     ...mapState('cart', ['cartList']),
-    ...mapGetters('cart', ['cartTotal', 'selCount', 'selPrice']),
+    ...mapGetters('cart', ['cartTotal', 'selCount', 'selPrice', 'selCartList']),
     ...mapGetters('cart', ['isAllChecked'])
   },
   created () {
@@ -126,6 +126,18 @@ export default {
       if (this.selCount === 0) return
       await this.$store.dispatch('cart/delSelect')
       this.isEdit = false
+    },
+    goPay () {
+      if (this.selCount > 0) {
+        // console.log(this.selCartList)
+        this.$router.push({
+          path: '/pay',
+          query: {
+            mode: 'cart',
+            cartIds: this.selCartList.map(item => item.id).join(',')
+          }
+        })
+      }
     }
   },
   watch: {
